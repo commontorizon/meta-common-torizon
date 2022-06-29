@@ -19,7 +19,7 @@ PACKAGECONFIG:remove = "gpgme"
 SYSTEMD_SERVICE:${PN} += "ostree-pending-reboot.path ostree-pending-reboot.service"
 
 DEPENDS_append_class-target = " ${@'u-boot-default-script' if '${PREFERRED_PROVIDER_u-boot-default-script}' else ''}"
-RDEPENDS_${PN}_append_class-target = " ${@'ostree-uboot-env' if '${PREFERRED_PROVIDER_u-boot-default-script}' and '${MACHINE}' != 'raspberrypi4-64' else ''}"
+RDEPENDS_${PN}_append_class-target = " ${@'ostree-uboot-env' if '${PREFERRED_PROVIDER_u-boot-default-script}' and 'raspberrypi' not in '${MACHINE}' else ''}"
 
 do_install:append () {
     install -d ${D}${systemd_system_unitdir}
