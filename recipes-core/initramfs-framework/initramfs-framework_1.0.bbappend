@@ -42,6 +42,12 @@ FILES:initramfs-module-kmod = "\
     /etc/modules-load.d/* \
 "
 
+SUMMARY:initramfs-module-firmware = "initramfs support for HDMI firmware"
+RDEPENDS:initramfs-module-firmware = "${PN}-base firmware-imx-hdmi"
+FILES:initramfs-module-firmware = "\
+    /usr/lib/firmware/* \
+"
+
 do_install:append() {
     install -m 0755 ${WORKDIR}/plymouth ${D}/init.d/02-plymouth
     install -m 0755 ${WORKDIR}/ostree ${D}/init.d/95-ostree
@@ -52,4 +58,15 @@ do_install:append:torizon-signed() {
     install -m 0755 ${WORKDIR}/composefs ${D}/init.d/98-composefs
     install -d ${D}/etc/modules-load.d/
     install -m 0755 ${WORKDIR}/80-composefs.conf ${D}/etc/modules-load.d/80-composefs.conf
+}
+
+SRC_URI:append:apalis-imx8 = " file://50-imx8-graphics.conf"
+RDEPENDS:initramfs-module-kmod:append:apalis-imx8 = " \
+    kernel-module-imx-gpu-viv \
+    kernel-module-cdns-mhdp-imx \
+"
+
+do_install:append:apalis-imx8() {
+    install -d ${D}/etc/modules-load.d/
+    install -m 0755 ${WORKDIR}/50-imx8-graphics.conf ${D}/etc/modules-load.d/50-imx8-graphics.conf
 }
