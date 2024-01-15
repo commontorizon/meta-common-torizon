@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI:append = " \
@@ -14,3 +15,7 @@ do_deploy:append:class-target() {
 	echo 'fs0:\\EFI\\BOOT\\'${DEST_IMAGE} > startup.nsh
 	install -m 755 ${B}/startup.nsh ${DEPLOYDIR}
 }
+=======
+# Add regexp command to GRUB
+GRUB_BUILDIN += "regexp"
+>>>>>>> 5bf1a43 (grub-efi: add regexp module to grub)
