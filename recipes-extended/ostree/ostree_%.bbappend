@@ -3,6 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 inherit bash-completion
 
 SRC_URI:append = " \
+    file://0001-ostree-grub-generator-allow-adding-custom-scripts-to.patch \
     file://0001-update-default-grub-cfg-header.patch \
     file://0002-Add-support-for-the-fdtfile-variable-in-uEnv.txt.patch \
     file://0003-ostree-fetcher-curl-handle-non-404-errors-as-G_IO_ER.patch \
@@ -50,4 +51,6 @@ do_install:append () {
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/ostree-pending-reboot.service ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/ostree-pending-reboot.path ${D}${systemd_system_unitdir}
+
+    install -d ${D}${sysconfdir}/ostree.d
 }
