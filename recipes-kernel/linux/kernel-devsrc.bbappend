@@ -17,6 +17,15 @@ do_install:append() {
         chown -R root:root $kerneldir/build/arch/arm64/tools/
         )
     fi
+
+    if [ "${ARCH}" = "arm" ]; then
+        (
+        cd ${S}
+        cp -a --parents arch/arm/tools/gen-sysreg.awk $kerneldir/build/	2>/dev/null || :
+
+        chown -R root:root $kerneldir/build/arch/arm/tools/
+        )
+    fi
     ######################################################################################################
 
     mv $kerneldir/build $kerneldir/linux
