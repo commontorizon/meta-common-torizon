@@ -18,19 +18,17 @@ DEPENDS = " \
     bison-native \
 "
 
-GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
-SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
-           file://run-ptest \
-           "
-SRC_URI[sha256sum] = "152327fe804512d4f896fb9b9e9cdc84ad9b4c0b205b8625472147d5a28164af"
+SRC_URI = " \
+    gitsm://github.com/ostreedev/ostree;branch=main;protocol=https \
+    file://run-ptest \
+"
+SRCREV = "3b4f5e36ee6b83313d4a4afc8dacb5bb9367ee2b"
 
-S = "${WORKDIR}/libostree-${PV}"
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
 
-inherit autotools bash-completion gobject-introspection github-releases gtk-doc manpages pkgconfig ptest-gnome systemd
+S = "${WORKDIR}/git"
 
-COMPATIBLE_HOST:riscv32 = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'null', 'riscv32', d)}"
-
-UNKNOWN_CONFIGURE_OPT_IGNORE = "--disable-introspection --enable-introspection"
+inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
 
 # Workaround compile failure:
 # |../git/src/libotutil/zbase32.c:37:1: error: function returns an aggregate [-Werror=aggregate-return]
@@ -84,11 +82,10 @@ PACKAGECONFIG[manpages] = "--enable-man, --disable-man, libxslt-native docbook-x
 PACKAGECONFIG[mkinitcpio] = "--with-mkinitcpio, --without-mkinitcpio"
 PACKAGECONFIG[no-http2] = "--disable-http2, --enable-http2"
 PACKAGECONFIG[openssl] = "--with-crypto=openssl, , openssl, , , glib gnutls"
-PACKAGECONFIG[rofiles-fuse] = "--enable-rofiles-fuse, --disable-rofiles-fuse, fuse3"
+PACKAGECONFIG[rofiles-fuse] = "--enable-rofiles-fuse, --disable-rofiles-fuse, fuse"
 PACKAGECONFIG[selinux] = "--with-selinux, --without-selinux, libselinux, bubblewrap"
 PACKAGECONFIG[smack] = "--with-smack, --without-smack, smack"
-PACKAGECONFIG[soup2] = "--with-soup, --without-soup, libsoup-2.4, , , soup3"
-PACKAGECONFIG[soup3] = "--with-soup3, --without-soup3, libsoup, , , soup2"
+PACKAGECONFIG[soup] = "--with-soup, --without-soup --disable-glibtest, libsoup-2.4"
 PACKAGECONFIG[static] = ""
 PACKAGECONFIG[systemd] = "--with-libsystemd --with-systemdsystemunitdir=${systemd_system_unitdir}, --without-libsystemd, systemd"
 
