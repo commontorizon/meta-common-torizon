@@ -68,6 +68,7 @@ PACKAGECONFIG:class-nativesdk ??= " \
 
 PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
 PACKAGECONFIG[builtin-grub2-mkconfig] = "--with-builtin-grub2-mkconfig, --without-builtin-grub2-mkconfig"
+PACKAGECONFIG[composefs] = "--with-composefs, --without-composefs"
 PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
 PACKAGECONFIG[dracut] = "--with-dracut, --without-dracut"
 PACKAGECONFIG[ed25519-libsodium] = "--with-ed25519-libsodium, --without-ed25519-libsodium, libsodium"
@@ -120,6 +121,7 @@ do_configure:prepend() {
     # allow it to work without the other gyrations which exist there
     cp ${S}/libglnx/Makefile-libglnx.am ${S}/libglnx/Makefile-libglnx.am.inc
     cp ${S}/bsdiff/Makefile-bsdiff.am ${S}/bsdiff/Makefile-bsdiff.am.inc
+    cp ${S}/composefs/libcomposefs/Makefile-lib.am ${S}/composefs/libcomposefs/Makefile-lib.am.inc
 }
 
 do_install:append:class-native() {
