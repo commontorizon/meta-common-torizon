@@ -96,7 +96,7 @@ GOVERSION ?= "1.20%"
 # Rust toolchain preferred versions:
 RUSTVERSION ?= "1.70%"
 
-CURLVERSION ?= "8.4.0"
+CURLVERSION ?= "8.6.0"
 
 PREFERRED_VERSION_cargo ?= "${RUSTVERSION}"
 PREFERRED_VERSION_cargo-native ?= "${RUSTVERSION}"
