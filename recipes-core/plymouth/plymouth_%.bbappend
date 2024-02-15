@@ -2,11 +2,12 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI += " \
     file://0001-disable-boot-splash-later.patch \
+    file://0001-themes-only-install-spinner.patch \
     file://torizonlogo-white.png \
     file://spinner.plymouth \
 "
 
-PACKAGECONFIG = "pango drm"
+PACKAGECONFIG = "drm"
 
 EXTRA_OECONF += "--with-udev --with-runtimedir=/run"
 
