@@ -14,6 +14,13 @@ PTEST_ENABLED = "0"
 # gpgme is not required, and it brings GPLv3 dependencies
 PACKAGECONFIG:remove = "gpgme"
 
+# Build with composefs support if override "cfs-support" is set; also, ensure
+# static linking is disabled because the static version of ostree-prepare-root does
+# not support composefs and it can only be run as PID 1, thus not being suitable
+# for running from the initial ramdisk.
+PACKAGECONFIG:append:cfs-support = " composefs"
+PACKAGECONFIG:remove:cfs-support = "static"
+
 SYSTEMD_SERVICE:${PN} += "ostree-pending-reboot.path ostree-pending-reboot.service"
 
 def is_ti(d):
