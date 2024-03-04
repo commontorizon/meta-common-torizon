@@ -1,0 +1,30 @@
+From 53a086ba294215508acba550237ab83f7d136c3e Mon Sep 17 00:00:00 2001
+From: Rogerio Guerra Borin <rogerio.borin@toradex.com>
+Date: Wed, 7 Feb 2024 00:19:45 -0300
+Subject: [PATCH] Expose MOUNT_ATTR_IDMAP detection result to C code
+
+This is to allow compiling composefs on machines having somewhat old
+Linux kernel headers.
+
+Signed-off-by: Rogerio Guerra Borin <rogerio.borin@toradex.com>
+---
+ configure.ac | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 4800477a..b6eb6c3f 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -292,7 +292,8 @@ AC_COMPILE_IFELSE(
+   ],[int foo = MOUNT_ATTR_IDMAP;]
+ 	)],
+ 	[AC_MSG_RESULT(yes)
+-	 have_mount_attr_idmap=yes],
++		AC_DEFINE([HAVE_MOUNT_ATTR_IDMAP], 1, [Define if MOUNT_ATTR_IDMAP is available in linux/mount.h])
++		have_mount_attr_idmap=yes],
+ 	[AC_MSG_RESULT(no)])
+ dnl These are needed by libcomposefs to use the new mount API optionally
+ AC_MSG_CHECKING([for new mount API (fsconfig)])
+-- 
+2.25.1
+

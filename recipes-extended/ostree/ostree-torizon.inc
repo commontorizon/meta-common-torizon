@@ -3,10 +3,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 inherit bash-completion
 
 SRC_URI:append = " \
-    file://0001-update-default-grub-cfg-header.patch \
-    file://0002-Add-support-for-the-fdtfile-variable-in-uEnv.txt.patch \
-    file://0003-ostree-fetcher-curl-handle-non-404-errors-as-G_IO_ER.patch \
-    file://0004-ostree-fetcher-curl-set-max-parallel-connections.patch \
     file://ostree-pending-reboot.service \
     file://ostree-pending-reboot.path \
 "
@@ -17,6 +13,13 @@ PTEST_ENABLED = "0"
 
 # gpgme is not required, and it brings GPLv3 dependencies
 PACKAGECONFIG:remove = "gpgme"
+
+# Build with composefs support if override "cfs-support" is set; also, ensure
+# static linking is disabled because the static version of ostree-prepare-root does
+# not support composefs and it can only be run as PID 1, thus not being suitable
+# for running from the initial ramdisk.
+PACKAGECONFIG:append:cfs-support = " composefs"
+PACKAGECONFIG:remove:cfs-support = "static"
 
 SYSTEMD_SERVICE:${PN} += "ostree-pending-reboot.path ostree-pending-reboot.service"
 

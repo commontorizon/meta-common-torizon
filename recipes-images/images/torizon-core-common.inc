@@ -111,5 +111,8 @@ TORADEX_PRODUCT_IDS:remove:colibri-imx6 = "0014 0016"
 
 CORE_IMAGE_BASE_INSTALL:append:torizon-signed = "\
     fsverity-utils \
-    kernel-module-composefs \
+"
+
+CORE_IMAGE_BASE_INSTALL:append:cfs-support = "\
+    composefs-tools \
 "
