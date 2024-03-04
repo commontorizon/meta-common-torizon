@@ -11,7 +11,7 @@ SRC_URI = " \
     file://client.toml \
 "
 
-SRCREV = "ddeb836a11adc5b93daed65bf36452dfcebbcb76"
+SRCREV = "dd2c885984f9ab19b522cb4cff22e46ae4095e3d"
 SRCREV:use-head-next = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
