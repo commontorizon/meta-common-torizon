@@ -105,5 +105,5 @@ PREFERRED_VERSION_libcurl ?= "${CURLVERSION}"
 # would be the case on a secure-boot image. Otherwise, the older battle-tested
 # version is selected.
 OSTREEVERSION ?= "2021.6"
-OSTREEVERSION:cfs-support ?= "2024.1"
+OSTREEVERSION:cfs-support ?= "2024.4"
 PREFERRED_VERSION_ostree ?= "${OSTREEVERSION}"
