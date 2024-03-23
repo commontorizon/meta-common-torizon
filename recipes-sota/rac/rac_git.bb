@@ -12,7 +12,9 @@ SRC_URI = " \
 "
 
 SRCREV = "dd2c885984f9ab19b522cb4cff22e46ae4095e3d"
-SRCREV:use-head-next = "${AUTOREV}"
+# FIXME: this sounds wrong, should not be the next
+# FIXME: BUT WE ARE FOLLOWING WHAT UPSTREAM IS DOING
+#SRCREV:use-head-next = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
