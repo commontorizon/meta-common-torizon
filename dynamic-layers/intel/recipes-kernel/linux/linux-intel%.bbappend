@@ -1,5 +1,5 @@
 
-require common.inc
+require recipes-kernel/linux/common.inc
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 

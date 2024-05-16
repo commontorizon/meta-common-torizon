@@ -3,7 +3,7 @@ require recipes-kernel/linux/linux-yocto.inc
 require recipes-kernel/linux/meta-intel-compat-kernel.inc
 
 # from common-torizon
-require common.inc
+require recipes-kernel/linux/common.inc
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
