@@ -11,4 +11,4 @@ SRC_URI = " \
     file://android-drivers.cfg \
 "
 
-require common.inc
+require recipes-kernel/linux/common.inc
